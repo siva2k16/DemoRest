@@ -48,23 +48,49 @@ public class MultiThreadExample
 		MultiHttpClientConThread testThread9 = new MultiHttpClientConThread(testClient9);
 		MultiHttpClientConThread testThread10 = new MultiHttpClientConThread(testClient10);
 
+		MultiHttpClientConThread testThread11 = new MultiHttpClientConThread(testClient1);
+		MultiHttpClientConThread testThread12 = new MultiHttpClientConThread(testClient2);
+		MultiHttpClientConThread testThread13 = new MultiHttpClientConThread(testClient3);
+		MultiHttpClientConThread testThread14 = new MultiHttpClientConThread(testClient4);
+		MultiHttpClientConThread testThread15 = new MultiHttpClientConThread(testClient5);
+
+		MultiHttpClientConThread testThread16 = new MultiHttpClientConThread(testClient6);
+		MultiHttpClientConThread testThread17 = new MultiHttpClientConThread(testClient7);
+		MultiHttpClientConThread testThread18 = new MultiHttpClientConThread(testClient8);
+		MultiHttpClientConThread testThread19 = new MultiHttpClientConThread(testClient9);
+		MultiHttpClientConThread testThread20 = new MultiHttpClientConThread(testClient10);
+		
 		LinkedBlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>();
 		System.out.println("Run 1"); 
 		
-		ThreadPoolExecutor executorService = new ThreadPoolExecutor(15, 15, 10, TimeUnit.SECONDS, queue);
-		executorService.execute(testThread1);
-		executorService.execute(testThread2);
-		executorService.execute(testThread3);
-		executorService.execute(testThread4);
-		executorService.execute(testThread5);
-		executorService.execute(testThread6);
-		executorService.execute(testThread7);
-		executorService.execute(testThread8);
-		executorService.execute(testThread9);
-		executorService.execute(testThread10);
+		ThreadPoolExecutor executorService1 = new ThreadPoolExecutor(15, 15, 10, TimeUnit.SECONDS, queue);
+		
+		ThreadPoolExecutor executorService2 = new ThreadPoolExecutor(15, 15, 10, TimeUnit.SECONDS, queue);
+		
+		executorService1.execute(testThread1);
+		executorService1.execute(testThread2);
+		executorService1.execute(testThread3);
+		executorService1.execute(testThread4);
+		executorService1.execute(testThread5);
+		executorService1.execute(testThread6);
+		executorService1.execute(testThread7);
+		executorService1.execute(testThread8);
+		executorService1.execute(testThread9);
+		executorService1.execute(testThread10);
+
+		executorService2.execute(testThread11);
+		executorService2.execute(testThread12);
+		executorService2.execute(testThread13);
+		executorService2.execute(testThread14);
+		executorService2.execute(testThread15);
+		executorService2.execute(testThread16);
+		executorService2.execute(testThread17);
+		executorService2.execute(testThread18);
+		executorService2.execute(testThread19);
+		executorService2.execute(testThread20);
 		
 		while (true) {
-		    if (executorService.getActiveCount() == 0) 
+		    if ((executorService1.getActiveCount() == 0) && (executorService2.getActiveCount() == 0))
 		    {
 		    	System.out.println("Total Calls made " + i);
 		    	long endTime   = System.currentTimeMillis();
