@@ -16,13 +16,9 @@ public class MultiThreadExample
 	public static void main(String args[])
 	{
 		PoolingHttpClientConnectionManager connManager1 = new PoolingHttpClientConnectionManager();
-		PoolingHttpClientConnectionManager connManager2 = new PoolingHttpClientConnectionManager();
 		connManager1.setMaxTotal(5000);
 		connManager1.setDefaultMaxPerRoute(5000);
-		
-		connManager2.setMaxTotal(5000);
-		connManager2.setDefaultMaxPerRoute(5000);
-		
+
 		long startTime = System.currentTimeMillis();
 		CloseableHttpClient testClient1 = HttpClients.custom().setConnectionManager(connManager1).build();
 		CloseableHttpClient testClient2 = HttpClients.custom().setConnectionManager(connManager1).build();
@@ -30,12 +26,25 @@ public class MultiThreadExample
 		CloseableHttpClient testClient4 = HttpClients.custom().setConnectionManager(connManager1).build();
 		CloseableHttpClient testClient5 = HttpClients.custom().setConnectionManager(connManager1).build();
 	
-		CloseableHttpClient testClient6 = HttpClients.custom().setConnectionManager(connManager2).build();
-		CloseableHttpClient testClient7 = HttpClients.custom().setConnectionManager(connManager2).build();
-		CloseableHttpClient testClient8 = HttpClients.custom().setConnectionManager(connManager2).build();
-		CloseableHttpClient testClient9 = HttpClients.custom().setConnectionManager(connManager2).build();
-		CloseableHttpClient testClient10 = HttpClients.custom().setConnectionManager(connManager2).build();
+		CloseableHttpClient testClient6 = HttpClients.custom().setConnectionManager(connManager1).build();
+		CloseableHttpClient testClient7 = HttpClients.custom().setConnectionManager(connManager1).build();
+		CloseableHttpClient testClient8 = HttpClients.custom().setConnectionManager(connManager1).build();
+		CloseableHttpClient testClient9 = HttpClients.custom().setConnectionManager(connManager1).build();
+		CloseableHttpClient testClient10 = HttpClients.custom().setConnectionManager(connManager1).build();
 	
+		CloseableHttpClient testClient11 = HttpClients.custom().setConnectionManager(connManager1).build();
+		CloseableHttpClient testClient12 = HttpClients.custom().setConnectionManager(connManager1).build();
+		CloseableHttpClient testClient13 = HttpClients.custom().setConnectionManager(connManager1).build();
+		CloseableHttpClient testClient14 = HttpClients.custom().setConnectionManager(connManager1).build();
+		CloseableHttpClient testClient15 = HttpClients.custom().setConnectionManager(connManager1).build();
+	
+		CloseableHttpClient testClient16 = HttpClients.custom().setConnectionManager(connManager1).build();
+		CloseableHttpClient testClient17 = HttpClients.custom().setConnectionManager(connManager1).build();
+		CloseableHttpClient testClient18 = HttpClients.custom().setConnectionManager(connManager1).build();
+		CloseableHttpClient testClient19 = HttpClients.custom().setConnectionManager(connManager1).build();
+		CloseableHttpClient testClient20 = HttpClients.custom().setConnectionManager(connManager1).build();
+	
+		
 		MultiHttpClientConThread testThread1 = new MultiHttpClientConThread(testClient1);
 		MultiHttpClientConThread testThread2 = new MultiHttpClientConThread(testClient2);
 		MultiHttpClientConThread testThread3 = new MultiHttpClientConThread(testClient3);
@@ -48,27 +57,25 @@ public class MultiThreadExample
 		MultiHttpClientConThread testThread9 = new MultiHttpClientConThread(testClient9);
 		MultiHttpClientConThread testThread10 = new MultiHttpClientConThread(testClient10);
 
-		MultiHttpClientConThread testThread11 = new MultiHttpClientConThread(testClient1);
-		MultiHttpClientConThread testThread12 = new MultiHttpClientConThread(testClient2);
-		MultiHttpClientConThread testThread13 = new MultiHttpClientConThread(testClient3);
-		MultiHttpClientConThread testThread14 = new MultiHttpClientConThread(testClient4);
-		MultiHttpClientConThread testThread15 = new MultiHttpClientConThread(testClient5);
+		MultiHttpClientConThread2 testThread11 = new MultiHttpClientConThread2(testClient11);
+		MultiHttpClientConThread2 testThread12 = new MultiHttpClientConThread2(testClient12);
+		MultiHttpClientConThread2 testThread13 = new MultiHttpClientConThread2(testClient13);
+		MultiHttpClientConThread2 testThread14 = new MultiHttpClientConThread2(testClient14);
+		MultiHttpClientConThread2 testThread15 = new MultiHttpClientConThread2(testClient15);
 
-		MultiHttpClientConThread testThread16 = new MultiHttpClientConThread(testClient6);
-		MultiHttpClientConThread testThread17 = new MultiHttpClientConThread(testClient7);
-		MultiHttpClientConThread testThread18 = new MultiHttpClientConThread(testClient8);
-		MultiHttpClientConThread testThread19 = new MultiHttpClientConThread(testClient9);
-		MultiHttpClientConThread testThread20 = new MultiHttpClientConThread(testClient10);
+		MultiHttpClientConThread2 testThread16 = new MultiHttpClientConThread2(testClient16);
+		MultiHttpClientConThread2 testThread17 = new MultiHttpClientConThread2(testClient17);
+		MultiHttpClientConThread2 testThread18 = new MultiHttpClientConThread2(testClient18);
+		MultiHttpClientConThread2 testThread19 = new MultiHttpClientConThread2(testClient19);
+		MultiHttpClientConThread2 testThread20 = new MultiHttpClientConThread2(testClient20);
 		
 		LinkedBlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>();
 		System.out.println("Run 1"); 
 		
-		ThreadPoolExecutor executorService1 = new ThreadPoolExecutor(15, 15, 10, TimeUnit.SECONDS, queue);
-		
-		ThreadPoolExecutor executorService2 = new ThreadPoolExecutor(15, 15, 10, TimeUnit.SECONDS, queue);
-		
+		ThreadPoolExecutor executorService1 = new ThreadPoolExecutor(5, 15, 30, TimeUnit.MINUTES, queue);
+			
 		executorService1.execute(testThread1);
-		executorService1.execute(testThread2);
+		executorService1.execute(testThread2); 
 		executorService1.execute(testThread3);
 		executorService1.execute(testThread4);
 		executorService1.execute(testThread5);
@@ -78,25 +85,28 @@ public class MultiThreadExample
 		executorService1.execute(testThread9);
 		executorService1.execute(testThread10);
 
-		executorService2.execute(testThread11);
-		executorService2.execute(testThread12);
-		executorService2.execute(testThread13);
-		executorService2.execute(testThread14);
-		executorService2.execute(testThread15);
-		executorService2.execute(testThread16);
-		executorService2.execute(testThread17);
-		executorService2.execute(testThread18);
-		executorService2.execute(testThread19);
-		executorService2.execute(testThread20);
+		executorService1.execute(testThread11);
+		executorService1.execute(testThread12);
+		executorService1.execute(testThread13);
+		executorService1.execute(testThread14);
+		executorService1.execute(testThread15); 
+		executorService1.execute(testThread16);
+		executorService1.execute(testThread17);
+		executorService1.execute(testThread18);
+		executorService1.execute(testThread19);
+		executorService1.execute(testThread20);
 		
 		while (true) {
-		    if ((executorService1.getActiveCount() == 0) && (executorService2.getActiveCount() == 0))
+		    if ((executorService1.getActiveCount() == 0))
 		    {
 		    	System.out.println("Total Calls made " + i);
 		    	long endTime   = System.currentTimeMillis();
 		    	long totalTime = endTime - startTime;
 		    	NumberFormat formatter = new DecimalFormat("#0.00000");
 		    	System.out.print("Execution time is " + formatter.format((totalTime / 1000d)/60) + " minutes");
+		    	System.out.print(" Rate " + formatter.format(i/((totalTime / 1000d)/60)) + " - calls per minute");
+		    	executorService1.shutdown();
+		    	connManager1.shutdown();
 		    	break;
 		    }
 		}

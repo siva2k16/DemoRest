@@ -8,11 +8,11 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
 
-public class MultiHttpClientConThread extends Thread
+public class MultiHttpClientConThread2 extends Thread
 {
 	private CloseableHttpClient client;
 	
-	public MultiHttpClientConThread(CloseableHttpClient client)
+	public MultiHttpClientConThread2(CloseableHttpClient client)
 	{
 		this.client = client;
 	}
@@ -21,7 +21,7 @@ public class MultiHttpClientConThread extends Thread
 	{
 		try
 		{
-			String[] exampleTestData = new String[]{"Dubai", "London", "Mumbai", "Chennai", "Bangalore"};
+			String[] exampleTestData = new String[]{"2172797", "2172796", "2172795", "2172794", "2172793"};
 			for(int i = 0, j =0 ; i < 100; i++, j++)
 			{
 				if(j ==5 )
@@ -29,13 +29,14 @@ public class MultiHttpClientConThread extends Thread
 					j = 0;
 				}
 				
-				HttpGet httpGetRequest = new HttpGet("http://api.openweathermap.org/data/2.5/weather?q=" + exampleTestData[j] + "&mode=xml");
+				HttpGet httpGetRequest = new HttpGet("http://api.openweathermap.org/data/2.5/weather?id=" + exampleTestData[j]);
 				HttpResponse response = client.execute(httpGetRequest);
 				System.out.println("Thread Name " + Thread.currentThread().getName() + ", i Value : " + i + " , Response status resp :" + response.getStatusLine());
 				MultiThreadExample.i++;
 				System.out.println("Calls made " + MultiThreadExample.i);
 			}
 			client.close();
+			
 		}
 		catch(ClientProtocolException Ex)
 		{
