@@ -22,7 +22,7 @@ public class MultiHttpClientConThread extends Thread
 		try
 		{
 			String[] exampleTestData = new String[]{"Dubai", "London", "Mumbai", "Chennai", "Bangalore"};
-			for(int i = 0, j =0 ; i < 100; i++, j++)
+			for(int i = 0, j =0 ; i < 150; i++, j++)
 			{
 				if(j ==5 )
 				{
@@ -33,9 +33,8 @@ public class MultiHttpClientConThread extends Thread
 				HttpResponse response = client.execute(httpGetRequest);
 				System.out.println("Thread Name " + Thread.currentThread().getName() + ", i Value : " + i + " , Response status resp :" + response.getStatusLine());
 				MultiThreadExample.i++;
-				System.out.println("Calls made " + MultiThreadExample.i);
+				System.out.println("Calls made " + MultiThreadExample.i + ", MultiHttpClientConThread");
 			}
-			client.close();
 		}
 		catch(ClientProtocolException Ex)
 		{

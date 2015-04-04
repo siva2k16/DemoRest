@@ -20,6 +20,7 @@ public class MultiThreadExample
 		connManager1.setDefaultMaxPerRoute(5000);
 
 		long startTime = System.currentTimeMillis();
+		
 		CloseableHttpClient testClient1 = HttpClients.custom().setConnectionManager(connManager1).build();
 		CloseableHttpClient testClient2 = HttpClients.custom().setConnectionManager(connManager1).build();
 		CloseableHttpClient testClient3 = HttpClients.custom().setConnectionManager(connManager1).build();
@@ -72,43 +73,54 @@ public class MultiThreadExample
 		LinkedBlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>();
 		System.out.println("Run 1"); 
 		
-		ThreadPoolExecutor executorService1 = new ThreadPoolExecutor(5, 15, 30, TimeUnit.MINUTES, queue);
-			
-		executorService1.execute(testThread1);
-		executorService1.execute(testThread2); 
-		executorService1.execute(testThread3);
-		executorService1.execute(testThread4);
-		executorService1.execute(testThread5);
-		executorService1.execute(testThread6);
-		executorService1.execute(testThread7);
-		executorService1.execute(testThread8);
-		executorService1.execute(testThread9);
-		executorService1.execute(testThread10);
-
-		executorService1.execute(testThread11);
-		executorService1.execute(testThread12);
-		executorService1.execute(testThread13);
-		executorService1.execute(testThread14);
-		executorService1.execute(testThread15); 
-		executorService1.execute(testThread16);
-		executorService1.execute(testThread17);
-		executorService1.execute(testThread18);
-		executorService1.execute(testThread19);
-		executorService1.execute(testThread20);
+		ThreadPoolExecutor executorService1 = new ThreadPoolExecutor(2, 2, 30, TimeUnit.HOURS, queue);
+		try
+		{
+			executorService1.execute(testThread1);
+			executorService1.execute(testThread2); 
+			executorService1.execute(testThread3);
+			executorService1.execute(testThread4);
+			executorService1.execute(testThread5);
+			executorService1.execute(testThread6);
+			executorService1.execute(testThread7);
+			executorService1.execute(testThread8);
+			executorService1.execute(testThread9);
+			executorService1.execute(testThread10);
+	
+			executorService1.execute(testThread11);
+			executorService1.execute(testThread12);
+			executorService1.execute(testThread13);
+			executorService1.execute(testThread14);
+			executorService1.execute(testThread15); 
+			executorService1.execute(testThread16);
+			executorService1.execute(testThread17);
+			executorService1.execute(testThread18);
+			executorService1.execute(testThread19);
+			executorService1.execute(testThread20);
 		
 		while (true) {
 		    if ((executorService1.getActiveCount() == 0))
 		    {
+		    	Thread.sleep(10 * 1000);
 		    	System.out.println("Total Calls made " + i);
 		    	long endTime   = System.currentTimeMillis();
 		    	long totalTime = endTime - startTime;
 		    	NumberFormat formatter = new DecimalFormat("#0.00000");
-		    	System.out.print("Execution time is " + formatter.format((totalTime / 1000d)/60) + " minutes");
-		    	System.out.print(" Rate " + formatter.format(i/((totalTime / 1000d)/60)) + " - calls per minute");
-		    	executorService1.shutdown();
-		    	connManager1.shutdown();
+		    	System.out.println("Execution time is - " + formatter.format((totalTime / 1000d)/60) + " minutes");
+		    	System.out.println(" Rate " + formatter.format(i/((totalTime / 1000d)/60)) + " - calls per minute");
+		    	System.out.println(" Rate " + formatter.format(i/((totalTime / 1000d)/60)/60) + " - calls per second");
+		    	executorService1.shutdown();;
 		    	break;
 		    }
+		}
+		}
+		catch(Exception Ex)
+		{
+			
+		}
+		finally
+		{
+
 		}
 	}
 }
