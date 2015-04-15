@@ -1,4 +1,4 @@
-package ThreadHttpClientExample;
+package loadTestExample;
 
 import java.io.IOException;
 
