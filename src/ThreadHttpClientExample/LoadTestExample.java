@@ -34,7 +34,8 @@ public class LoadTestExample {
 		WeatherTestCoordinate[] testWeatherTestCoordinates = new WeatherTestCoordinate[noOfWeatherTestCoordinate];
 
 		for (int i = 0; i < noOfWeatherTestLocation; i++) {
-			testWeatherTestLocations[i] = new WeatherTestLocation(httpTestClient[i]);
+			testWeatherTestLocations[i] = new WeatherTestLocation(
+					httpTestClient[i]);
 		}
 
 		for (int i = 0, j = noOfWeatherTestLocation; i < noOfWeatherTestCoordinate; i++) {
